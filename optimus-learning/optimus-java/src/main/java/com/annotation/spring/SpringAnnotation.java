@@ -1,7 +1,5 @@
 package com.annotation.spring;
 
-import org.springframework.stereotype.Component;
-
 /**
  * Spring 常用注解:@
  * Component:标准一个普通的spring Bean类。
