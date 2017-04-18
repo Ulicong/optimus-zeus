@@ -1,4 +1,4 @@
 # optimus-zeus
 double 分布式学习
-optimus-spring
+optimus-learning
 Java基础知识学习积累
