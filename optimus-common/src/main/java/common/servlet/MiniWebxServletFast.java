@@ -5,6 +5,8 @@ import common.exception.LoginTimeoutException;
 import common.mvc.spring.SpringMvcUtil;
 import common.mvc.spring.UriHandleMappedUtil;
 import common.mvc.spring.UriMappedHandler;
+import common.util.JsonResult;
+import common.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -186,6 +188,50 @@ public class MiniWebxServletFast extends HttpServlet {
      */
     private void renderExceptionView(HttpServletRequest req, HttpServletResponse res, Throwable ex, Error err, Boolean hasHandler) {
 
+    }
+
+
+    /**
+     * 输出Josn
+     */
+    private static void outJson(Object obj, String[] excludes, HttpServletResponse response, HttpServletRequest request) {
+        String outMsg = "";
+        try {
+            outMsg = JsonUtil.toJson(obj);
+            if (response != null) {
+                response.setContentType("text/html; charset=UTF-8");
+                response.setCharacterEncoding("utf-8");
+            }
+
+            if (request != null) {
+                String output = null;
+                // 兼容 jsonp 请求
+                if (request.getParameter("_callback_var") != null) {
+                    output = "var " + request.getParameter("_callback_var") + "=" + outMsg + ";";
+                } else if (request.getParameter("_callback_jsonp") != null) {
+                    output = request.getParameter("_callback_jsonp") + "(" + outMsg + ");";
+                } else {
+                    output = outMsg;
+                }
+
+                response.getWriter().write(output);
+            } else {
+                response.getWriter().write(outMsg);
+            }
+            response.getWriter().close();
+        } catch (Exception e) {
+            JsonResult jr = new JsonResult();
+            jr.setSuccess(false);
+            jr.setErrorMsg(e.getMessage());
+            jr.setErrorCode("500");
+            try {
+                response.getWriter().write(JsonUtil.toJson(jr));
+            } catch (Exception e2) {
+            }
+            log.error("json输出出错：", e);
+        } finally {
+            log.info("输出JSON: " + outMsg);
+        }
     }
 
 }
