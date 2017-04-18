@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- ############################################ dubbo config ############################################
+    <dubbo:annotation package="cgtz.optimus.module.pay.ao.impl" />
+    <dubbo:provider delay="-1" />
+    <dubbo:application name="${dubbo.application.name}" />
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"></dubbo:protocol>
+    <dubbo:registry address="${dubbo.registry.address}" file="${user.home}/optimus-cache/${dubbo.application.name}_cache.properties"></dubbo:registry>
+    <dubbo:consumer check="false" />
+    <dubbo:monitor protocol="registry" />
+-->
+
+
+    <!-- ############################################ 基础配置 ############################################ -->
+    <context:property-placeholder location="classpath:config.properties"/>
+    <context:component-scan base-package="com.**, zeus.**"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+
+    <!-- ############################################ mvc相关配置 ############################################ -->
+    <!-- spring_mvc 拦截器
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <bean class="com.zpd.common.mvc.interceptor.AuthInterceptor">
+                </bean>
+                <bean class="com.zpd.common.mvc.interceptor.PagingInterceptor4Web"></bean>
+            </list>
+        </property>
+    </bean> -->
+
+
+    <!-- 类型转换配置
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.zpd.common.mvc.converter.String2DateConverter" init-method="init">
+                    <property name="formats">
+                        <list>
+                            <value>yyyy-MM-dd HH:mm:ss</value>
+                            <value>yyyy-MM-dd</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="com.zpd.common.mvc.converter.String2DoubleConverter" />
+                <bean class="com.zpd.common.mvc.converter.String2IntegerConverter" />
+            </list>
+        </property>
+    </bean>-->
+
+
+    <!-- ############################################ db 相关配置 ############################################ -->
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}"/>
+        <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
+        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+        <property name="logAbandoned" value="true"></property>
+
+        <property name="testOnBorrow" value="true"></property>
+        <property name="validationQuery" value="select 1"></property>
+        <property name="validationQueryTimeout" value="1"></property>
+        <property name="testWhileIdle" value="true"></property>
+        <property name="numTestsPerEvictionRun" value="${jdbc.maxActive}"></property>
+        <property name="minEvictableIdleTimeMillis" value="1800000"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"></property>
+        <property name="connectionProperties" value="connectTimeout=200;socketTimeout=200"></property>
+    </bean>
+
+    <!-- 配置 transaction 处理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 启动 annotation 事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <aop:config proxy-target-class="true"></aop:config>
+
+    <!-- mybatis 拦截器 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--
+        <property name="plugins">
+            <list>
+                <bean class="com.zpd.common.mybatis.MybatisInterceptor"></bean>
+            </list>
+        </property>
+        -->
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="zeus.optimus.module.*.dal.mapper"/>
+    </bean>
+
+</beans>

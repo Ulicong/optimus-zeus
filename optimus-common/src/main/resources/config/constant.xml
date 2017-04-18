@@ -1,0 +1,11 @@
+<root>
+	
+	<!-- 用于配置复杂的模板 -->
+	<config id="cfgId">
+		<![CDATA[
+			cfg content
+		]]>	
+	</config>
+
+
+</root>
