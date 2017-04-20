@@ -5,7 +5,7 @@
   <parent>
     <groupId>optimus-group</groupId>
     <artifactId>optimus-model</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
   </parent>
   <artifactId>optimus-model-api</artifactId>
   <version>1.0</version>
@@ -21,12 +21,12 @@
     <dependency>
       <groupId>optimus-group</groupId>
       <artifactId>optimus-model-impl</artifactId>
-      <version>1.1</version>
+      <version>1.0</version>
     </dependency>
     <dependency>
       <groupId>optimus-group</groupId>
       <artifactId>optimus-model-interface</artifactId>
-      <version>1.1</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 </project>

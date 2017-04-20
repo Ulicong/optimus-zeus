@@ -9,7 +9,7 @@
         <version>1.1</version>
     </parent>
     <artifactId>optimus-learning</artifactId>
-    <version>1.1</version>
+    <version>1.0</version>
     <name>optimus-learning</name>
     <packaging>pom</packaging>
     <description>java基础知识和spring相关知识学习积累</description>

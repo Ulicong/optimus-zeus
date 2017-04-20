@@ -9,7 +9,7 @@
       <artifactId>optimus-model</artifactId>
       <name>optimus-model</name>
       <packaging>pom</packaging>
-      <version>1.1</version>
+      <version>1.0</version>
   <modules>
     <module>optimus-model-api</module>
     <module>optimus-model-interface</module>
