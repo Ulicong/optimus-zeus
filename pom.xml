@@ -4,14 +4,14 @@
     <groupId>optimus-group</groupId>
     <artifactId>optimus-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>optimus-parent</name>
 	
     <properties>
         <java-version>1.7</java-version>
         <project-encoding>utf-8</project-encoding>
         <spring-version>3.0.5.RELEASE</spring-version>
-        <optimus-version>1.0</optimus-version>
+        <optimus-version>1.1</optimus-version>
     </properties>
 	
   <modules>
@@ -62,11 +62,6 @@
             <groupId>jetty-util</groupId>
             <artifactId>jetty-util</artifactId>
             <version>6.1.26</version>
-        </dependency>
-        <dependency>
-            <groupId>cgtz-taskcontroll-api</groupId>
-            <artifactId>cgtz-taskcontroll-api</artifactId>
-            <version>0.5</version>
         </dependency>
         <!-- dubbo -->
         <dependency>

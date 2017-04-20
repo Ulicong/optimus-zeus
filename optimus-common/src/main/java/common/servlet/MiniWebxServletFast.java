@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -184,7 +185,7 @@ public class MiniWebxServletFast extends HttpServlet {
 
 
     /**
-     * 渲染异常页面
+     * 根据异常类型-渲染异常页面
      */
     private void renderExceptionView(HttpServletRequest req, HttpServletResponse res, Throwable ex, Error err, Boolean hasHandler) {
 
@@ -197,28 +198,24 @@ public class MiniWebxServletFast extends HttpServlet {
     private static void outJson(Object obj, String[] excludes, HttpServletResponse response, HttpServletRequest request) {
         String outMsg = "";
         try {
+            PrintWriter writer = response.getWriter();
             outMsg = JsonUtil.toJson(obj);
-            if (response != null) {
-                response.setContentType("text/html; charset=UTF-8");
-                response.setCharacterEncoding("utf-8");
-            }
-
+            response.setContentType("text/html; charset=UTF-8");
+            response.setCharacterEncoding("utf-8");
             if (request != null) {
-                String output = null;
-                // 兼容 jsonp 请求
-                if (request.getParameter("_callback_var") != null) {
+                String output;
+                if (request.getParameter("_callback_var") != null) { // 兼容 jsonp 请求
                     output = "var " + request.getParameter("_callback_var") + "=" + outMsg + ";";
                 } else if (request.getParameter("_callback_jsonp") != null) {
                     output = request.getParameter("_callback_jsonp") + "(" + outMsg + ");";
                 } else {
                     output = outMsg;
                 }
-
-                response.getWriter().write(output);
+                writer.write(output);
             } else {
-                response.getWriter().write(outMsg);
+                writer.write(outMsg);
             }
-            response.getWriter().close();
+            writer.close();
         } catch (Exception e) {
             JsonResult jr = new JsonResult();
             jr.setSuccess(false);
@@ -227,6 +224,7 @@ public class MiniWebxServletFast extends HttpServlet {
             try {
                 response.getWriter().write(JsonUtil.toJson(jr));
             } catch (Exception e2) {
+                log.error("json输出出错：", e2);
             }
             log.error("json输出出错：", e);
         } finally {

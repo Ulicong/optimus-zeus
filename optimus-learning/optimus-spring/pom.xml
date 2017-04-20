@@ -6,11 +6,36 @@
     <parent>
         <groupId>optimus-group</groupId>
         <artifactId>optimus-learning</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
     <artifactId>optimus-spring</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>optimus-spring</name>
-    <description>spring 基础知识学习</description>
+    <description>spring 基础知识学习基于DispatcherServlet</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <configuration>
+                    <stopPort>9988</stopPort>
+                    <stopKey>foo</stopKey>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <connectors>
+                        <!--<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">-->
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8088</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                        <defaultsDescriptor></defaultsDescriptor>
+                    </webAppConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
