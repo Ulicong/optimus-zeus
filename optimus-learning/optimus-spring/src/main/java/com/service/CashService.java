@@ -8,7 +8,7 @@ import java.util.List;
  * Created by li.huan
  * Create Date 2017-04-21 11:16
  */
-public interface CashManager {
+public interface CashService {
 
     List<QueryWalletBasicData> queryWalletBasicData();
 }

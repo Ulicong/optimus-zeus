@@ -16,7 +16,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <context:property-placeholder location="classpath:config.properties"/>
 
 
-
     <context:component-scan base-package="com" use-default-filters="false">
         <context:include-filter type="regex" expression="com\.service\..*"/>
     </context:component-scan>
@@ -36,15 +35,15 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}"/>
         <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
         <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
-        <property name="logAbandoned" value="true"></property>
-        <property name="testOnBorrow" value="true"></property>
-        <property name="validationQuery" value="select 1"></property>
-        <property name="validationQueryTimeout" value="1"></property>
-        <property name="testWhileIdle" value="true"></property>
-        <property name="numTestsPerEvictionRun" value="${jdbc.maxActive}"></property>
-        <property name="minEvictableIdleTimeMillis" value="1800000"></property>
-        <property name="timeBetweenEvictionRunsMillis" value="3600000"></property>
-        <property name="connectionProperties" value="connectTimeout=3000;socketTimeout=3000"></property>
+        <property name="logAbandoned" value="true"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="validationQueryTimeout" value="1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="numTestsPerEvictionRun" value="${jdbc.maxActive}"/>
+        <property name="minEvictableIdleTimeMillis" value="1800000"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"/>
+        <property name="connectionProperties" value="connectTimeout=3000;socketTimeout=3000"/>
     </bean>
 
     <!-- 配置 transaction 处理器 -->
@@ -55,13 +54,14 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <!-- 启动 annotation 事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <aop:config proxy-target-class="true"></aop:config>
+    <aop:config proxy-target-class="true"/>
 
-    <!-- mybaits 工厂类 -->
+    <!-- myBaits 工厂类 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!--把Mapper转换成SpringBean-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" scope="singleton">
         <property name="basePackage" value="com.model.mapper"/>
     </bean>

@@ -1,7 +1,7 @@
 package com.action;
 
 import com.model.entity.QueryWalletBasicData;
-import com.service.CashManager;
+import com.service.CashService;
 import common.util.JsonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,13 @@ import java.util.List;
 @RequestMapping(value = "/test")
 public class TestController {
 
-    @Resource(name = "cashManager")
-    private CashManager cashManager;
+    @Resource(name = "cashService")
+    private CashService cashService;
 
 
     @RequestMapping(value = "mainJson")
     public void mainJson(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-        List<QueryWalletBasicData> list = cashManager.queryWalletBasicData();
+        List<QueryWalletBasicData> list = cashService.queryWalletBasicData();
         String json = JsonUtil.toJson(list);
         resp.setContentType("text/html; charset=UTF-8");
         resp.setCharacterEncoding("utf-8");
