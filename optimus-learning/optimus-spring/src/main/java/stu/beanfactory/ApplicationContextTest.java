@@ -16,4 +16,5 @@ public class ApplicationContextTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(xmlPath);
         context.start();
     }
+
 }

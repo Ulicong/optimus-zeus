@@ -2,6 +2,12 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <!--
+        web.xml是J2EE Web项目规范 所有实现servlet-api服务器Jetty/Tomcat启动时
+        第一个读取的就是web.xml;当加载ContextLoaderListener时会初始化spring容器;
+        最终spring容器对接Jetty/Tomcat容器
+        WebApplicationContext --> ServletContext
+    -->
     <display-name>/</display-name>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
