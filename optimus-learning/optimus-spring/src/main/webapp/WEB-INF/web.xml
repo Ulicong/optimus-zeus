@@ -36,6 +36,7 @@
         <param-value>classpath:config/applicationContext.xml</param-value>
     </context-param>
 
+
     <!-- 启用spring监听 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

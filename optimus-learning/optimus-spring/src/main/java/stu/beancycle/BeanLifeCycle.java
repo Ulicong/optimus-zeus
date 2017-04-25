@@ -17,6 +17,8 @@ public class BeanLifeCycle {
         ClassPathResource resource = new ClassPathResource("stu/beancycle/spring-beans.xml");
         XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(resource);
 
+        System.out.print(xmlBeanFactory.getBeanDefinitionCount());
+
         ((ConfigurableBeanFactory) xmlBeanFactory).addBeanPostProcessor(new MyBeanPostProcessor());
         ((ConfigurableBeanFactory) xmlBeanFactory).addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
 
@@ -29,6 +31,8 @@ public class BeanLifeCycle {
         System.out.print("car == car2:" + (car == car2) + "\n");
 
         ((XmlBeanFactory) xmlBeanFactory).destroySingletons();
+
+
     }
 
 
