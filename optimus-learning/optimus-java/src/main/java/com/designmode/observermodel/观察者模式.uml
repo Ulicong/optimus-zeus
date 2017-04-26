@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.designmode.observermodel.Observer</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">com.designmode.observermodel.Subject</node>
+    <node x="8.5" y="172.0">com.designmode.observermodel.MyTopic</node>
+    <node x="258.5" y="206.0">com.designmode.observermodel.MyTopticSubscriber</node>
+    <node x="336.5" y="22.5">com.designmode.observermodel.Observer</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.designmode.observermodel.MyTopic" target="com.designmode.observermodel.Subject">
+      <point x="-57.5" y="-84.5" />
+      <point x="-66.0" y="61.0" />
+    </edge>
+    <edge source="com.designmode.observermodel.MyTopic" target="com.designmode.observermodel.Observer">
+      <point x="57.5" y="-84.5" />
+      <point x="181.0" y="152.0" />
+      <point x="378.0" y="152.0" />
+      <point x="-41.5" y="38.5" />
+    </edge>
+    <edge source="com.designmode.observermodel.MyTopticSubscriber" target="com.designmode.observermodel.Subject">
+      <point x="-67.5" y="-50.5" />
+      <point x="326.0" y="142.0" />
+      <point x="198.0" y="142.0" />
+      <point x="66.0" y="61.0" />
+    </edge>
+    <edge source="com.designmode.observermodel.MyTopticSubscriber" target="com.designmode.observermodel.Observer">
+      <point x="67.5" y="-50.5" />
+      <point x="41.5" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="264.5" y="170.5" />
+  <SelectedNodes>
+    <node>com.designmode.observermodel.Observer</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
