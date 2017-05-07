@@ -305,7 +305,7 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.5.8</version>
         </dependency>
-        <!-- spring 3.0.5 -->
+        <!-- spring 3.0.5  -->
         <dependency>
             <groupId>spring.aop</groupId>
             <artifactId>spring.aop</artifactId>
