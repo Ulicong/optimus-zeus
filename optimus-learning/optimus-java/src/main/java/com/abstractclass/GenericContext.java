@@ -8,6 +8,7 @@ public class GenericContext extends AbstractContext {
 
 
     public GenericContext() {
+        super();
     }
 
     public GenericContext(String name) {

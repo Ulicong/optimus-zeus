@@ -9,7 +9,9 @@ public class AbstractTest {
     protected static AbstractContext context;
 
     public static void main(String[] args){
-        context.getBean();
+        GenericContext genericContext = new GenericContext("xxx");
+       // String bean = genericContext.getBean();
+       // System.out.print(bean);
     }
 
 }

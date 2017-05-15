@@ -406,5 +406,11 @@
             <artifactId>java-sdk</artifactId>
             <version>3.8</version>
         </dependency>
+        <!-- jackson jar -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>1.9.11</version>
+        </dependency>
     </dependencies>
 </project>

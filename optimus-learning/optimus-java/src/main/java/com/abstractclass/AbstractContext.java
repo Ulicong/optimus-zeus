@@ -9,7 +9,7 @@ public abstract class AbstractContext {
     private String name;
 
     public AbstractContext() {
-        this(null);
+        System.out.println("父类初始化");
     }
 
     public AbstractContext(String name) {
@@ -17,4 +17,9 @@ public abstract class AbstractContext {
     }
 
     public abstract String getBean();
+
+
+
+
+
 }
