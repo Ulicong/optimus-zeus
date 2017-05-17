@@ -1,0 +1,8 @@
+@startuml
+Tomcat -> ContextLoaderListener:read web.xml
+ContextLoaderListener -> ContextLoader : initWebApplicationContext
+ContextLoader --> XmlWebApplicationContext: new
+XmlWebApplicationContext -> ConfigurableWebApplicationContext:transform
+ConfigurableWebApplicationContext -> AbstractApplicationContext :refresh
+
+@enduml

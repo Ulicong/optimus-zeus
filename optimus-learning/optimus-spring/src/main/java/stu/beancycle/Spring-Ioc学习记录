@@ -1,0 +1,142 @@
+
+#Spring学习笔记(一)——IOC
+
+```
+AbstractApplicationContext中会初始化resourcePatternResolver，
+默认是org.springframework.core.io.support.PathMatchingResourcePatternResolver.setConfigLocations(configLocations);
+
+ApplicationContext初始化主要函数:
+org.springframework.context.support.AbstractApplicationContext.refresh();
+
+```
+
+## 1. ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory()
+
+将形如
+<bean id=”a” class=”A”>
+<property name=”prop1”>value1</property>
+</bean>
+或注解形式定义的Bean转换成BeanDefinition，并存入DefaultListBeanFactory.beanDefinitionMap
+并将构建好的beanFactory作为AbstractApplicationContext的属性
+
+
+
+## 2. AbstractApplicationContext.prepareBeanFactory(ConfigurableListableBeanFactory beanFactory)
+
+其中有步操作：beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
+这个ApplicationContextAwareProcessor是个BeanPostProcessor，负责注入ResourceLoaderAware, ApplicationEventPublisherAware, 
+MessageSourceAware, ApplicationContextAware ApplicationContext相关特性的Bean.
+
+
+```
+if (bean instanceof ResourceLoaderAware) {
+    ((ResourceLoaderAware) bean).setResourceLoader(this.applicationContext);
+}
+
+if (bean instanceof ApplicationEventPublisherAware) {
+    ((ApplicationEventPublisherAware) bean).setApplicationEventPublisher(this.applicationContext);
+}
+
+if (bean instanceof MessageSourceAware) {
+    ((MessageSourceAware) bean).setMessageSource(this.applicationContext);
+}
+
+if (bean instanceof ApplicationContextAware) {
+    ((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
+}
+
+```
+
+## 3. postProcessBeanFactory(beanFactory);
+自定义修改应用程序上下文的bean定义
+
+
+## 4. invokeBeanFactoryPostProcessors(beanFactory);
+
+调用所有beanFactoryPostProcessor， BeanFactoryPostProcessor是一个接口，会处理beanfactory中的beanDefinition，实现此接口会被调用。
+调用实现 PriorityOrdered接口的processor,并按priority排序调用
+调用实现Ordered接口的processor,并按顺序调用。
+最后调用其它实现BeanFactoryProcessor.
+
+
+
+## 5. registerBeanPostProcessors(beanFactory);
+
+将bean中所有的实现BeanPostProcessor接口的bean找到
+如果有，先将BeanPostProcessorChecker加入数组
+取得beanfactory中所有BeanPostProcessor
+将其分组实现PriorityOrdered接口的，实现Ordered的接口，剩下的。
+对PrioityOrded接口的进行排序并依次加入数组，
+再将Orderd的加入，最后加入剩下的
+
+
+
+## 6. initMessageSource();
+寻找beanName为messageSource的bean,并初始化之。如果没有，初始化默认的。
+
+
+## 7. initApplicationEventMulticaster();
+寻找beanName为applicationEventMulticaster的bean，并初始化。如果没有，初始化默认的.在广播时寻找所有实现接口ApplicationListener的类。
+
+
+
+## 8．onRefresh()
+
+
+## 9. registerListeners()
+注册所有实现接口ApplicationListener接口的类。
+
+
+
+## 10. finishBeanFactoryInitialization(beanFactory)
+```
+
+初始化所有singlton的bean
+Singleton创建方法：
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(String, ObjectFactory)
+化普通创建为Factory.getObject()方法
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(String, RootBeanDefinition, Object[])
+通过合适的方法找到时候的构造函数，初始化bean.并形成一个beanwrapper,并对每个属性进行Editor注册
+
+a.调用构造函数
+
+b.注入属性
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(String, Object, RootBeanDefinition)
+
+
+c.注入BeanFactory 感知环境的接口BeanNameAware,BeanClassLoaderAware,BeanFactoryAware
+
+if (bean instanceof BeanNameAware) {
+    ((BeanNameAware) bean).setBeanName(beanName);
+}
+
+if (bean instanceof BeanClassLoaderAware) {
+    ((BeanClassLoaderAware) bean).setBeanClassLoader(getBeanClassLoader());
+}
+
+if (bean instanceof BeanFactoryAware) {
+    ((BeanFactoryAware) bean).setBeanFactory(this);
+}
+
+
+
+d.调用BeanPostProcessors
+applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
+采用责任链模式调用 BeanPostProcessor.ProcessBeforeInitialization(result, beanName)
+
+
+
+e. 如果Bean实现了InitializingBean,调用afterPropertiesSet方法。
+
+
+
+f.如果Bean具有init-method属性，调用init-method方法。
+invokeCustomInitMethod(beanName, bean, initMethodName, mbd.isEnforceInitMethod());
+
+
+
+g.最后调用BeanPostProcessors
+
+applyBeanPostProcessorsAfterInitialization(wrappedBean,beanName);
+采用责任链模式调用BeanPostProcessor.postProcessAfterInitialization(result, beanName)
+```
