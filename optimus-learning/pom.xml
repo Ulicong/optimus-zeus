@@ -13,16 +13,8 @@
     <name>optimus-learning</name>
     <packaging>pom</packaging>
     <description>java基础知识和spring相关知识学习积累</description>
-
     <modules>
         <module>optimus-java</module>
         <module>optimus-spring</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>optimus-group</groupId>
-            <artifactId>optimus-common</artifactId>
-            <version>1.1</version>
-        </dependency>
-    </dependencies>
 </project>

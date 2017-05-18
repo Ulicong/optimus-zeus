@@ -28,7 +28,7 @@ public class RestApiServer {
     }
 
     //spring 配置文件
-    private final String[] springXmls = new String[]{"config/spring-view.xml"};
+    private final String[] springXmls = new String[]{"config/applicationContext.xml","config/springMVC-servlet.xml"};
 
     private Logger log;
 

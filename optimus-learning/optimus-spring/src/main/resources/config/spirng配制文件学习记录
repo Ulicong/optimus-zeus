@@ -1,0 +1,9 @@
+#1.applicationContext.xml
+     <context:component-scan base-package="stu.**"/>用于配制除Controllor以外的业务Bean
+     
+#2.springMvc-servlet.xml
+    <context:component-scan base-package="com.**,stu.mvc.**"/>用于配制mvc-controller-Bean
+
+
+#注意
+    由于spring-mvc在启动时会描述

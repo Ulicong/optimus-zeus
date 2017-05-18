@@ -1,4 +1,4 @@
-package stu.http.vo;
+package stu.mvc.http.vo;
 
 /**
  * Created by li.huan

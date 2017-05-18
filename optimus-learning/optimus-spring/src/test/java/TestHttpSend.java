@@ -1,5 +1,7 @@
 import common.util.HttpRequestAccess;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by li.huan
@@ -8,20 +10,13 @@ import org.junit.Test;
 public class TestHttpSend {
 
 
-    /*
-        private ClassPathXmlApplicationContext context;
+    private ClassPathXmlApplicationContext context;
 
-        @Before
-        public void before() {
-            context = new ClassPathXmlApplicationContext(new String[]{"config/applicationContext.xml", "config/springMVC-servlet.xml"});
-        }
+    @Before
+    public void before() {
+        context = new ClassPathXmlApplicationContext(new String[]{"config/applicationContext.xml", "config/springMVC-servlet.xml"});
+    }
 
-
-        @Test
-        public void testJsonSend(){
-            //HttpTestController controller = context.getBean(HttpTestController.class);
-        }
-    */
 
     @Test
     public void testJsonSend() {

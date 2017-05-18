@@ -62,7 +62,7 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:config/springMVC-servlet.xml</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+       <!-- <load-on-startup>1</load-on-startup>-->
     </servlet>
     <!-- 拦截匹配的请求 -->
     <servlet-mapping>

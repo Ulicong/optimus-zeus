@@ -11,6 +11,7 @@
 
     <artifactId>optimus-common</artifactId>
     <name>optimus-common</name>
-
+    <packaging>jar</packaging>
+    <version>1.1</version>
 
 </project>
