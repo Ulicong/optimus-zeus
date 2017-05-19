@@ -18,5 +18,7 @@ public class ResourceLoadTest {
         System.out.println(ResourceLoadTest.class.getClassLoader().getResource(""));
         System.out.println(ResourceLoadTest.class.getResource(""));
         System.out.println(ResourceLoadTest.class.getResource("/"));
+        System.out.println(Thread.currentThread().getContextClassLoader().getResource(""));
+        System.out.println(System.getProperty("user.dir"));
     }
 }

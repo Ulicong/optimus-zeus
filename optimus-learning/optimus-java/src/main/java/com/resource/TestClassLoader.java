@@ -1,4 +1,11 @@
+package com.resource;
+
 import java.util.Map;
+
+/**
+ * Created by li.huan
+ * Create Date 2017-05-18 14:43
+ */
 public class TestClassLoader {
 
 
