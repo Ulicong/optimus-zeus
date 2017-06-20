@@ -1,4 +1,4 @@
-import common.util.HttpRequestAccess;
+import com.common.util.HttpRequestAccess;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

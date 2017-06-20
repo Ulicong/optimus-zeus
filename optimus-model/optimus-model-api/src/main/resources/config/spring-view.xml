@@ -12,20 +12,20 @@
 		     http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-    <!-- ############################################ dubbo config ############################################
-    <dubbo:annotation package="cgtz.optimus.module.pay.ao.impl" />
+    <!-- ############################################ dubbo config ############################################-->
+    <dubbo:annotation package="com.optimus.module.user.ao.impl" />
     <dubbo:provider delay="-1" />
     <dubbo:application name="${dubbo.application.name}" />
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"></dubbo:protocol>
     <dubbo:registry address="${dubbo.registry.address}" file="${user.home}/optimus-cache/${dubbo.application.name}_cache.properties"></dubbo:registry>
     <dubbo:consumer check="false" />
     <dubbo:monitor protocol="registry" />
--->
+
 
 
     <!-- ############################################ 基础配置 ############################################ -->
     <context:property-placeholder location="classpath:config.properties"/>
-    <context:component-scan base-package="com.**, zeus.**"/>
+    <context:component-scan base-package="com.**"/>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 
@@ -42,11 +42,11 @@
     </bean> -->
 
 
-    <!-- 类型转换配置
+    <!-- 类型转换配置-->
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <list>
-                <bean class="com.zpd.common.mvc.converter.String2DateConverter" init-method="init">
+                <bean class="com.common.mvc.converter.String2DateConverter" init-method="init">
                     <property name="formats">
                         <list>
                             <value>yyyy-MM-dd HH:mm:ss</value>
@@ -54,11 +54,11 @@
                         </list>
                     </property>
                 </bean>
-                <bean class="com.zpd.common.mvc.converter.String2DoubleConverter" />
-                <bean class="com.zpd.common.mvc.converter.String2IntegerConverter" />
+                <bean class="com.common.mvc.converter.String2DoubleConverter" />
+                <bean class="com.common.mvc.converter.String2IntegerConverter" />
             </list>
         </property>
-    </bean>-->
+    </bean>
 
 
     <!-- ############################################ db 相关配置 ############################################ -->
@@ -111,7 +111,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="zeus.optimus.module.*.dal.mapper"/>
+        <property name="basePackage" value="com.optimus.module.*.dal.mapper"/>
     </bean>
 
 </beans>

@@ -1,6 +1,7 @@
 package com.resource;
 
-import java.util.Map;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 /**
  * Created by li.huan
@@ -26,10 +27,17 @@ public class TestClassLoader {
 //        }
 
 //
-        for (Map.Entry<Object,Object> entry: System.getProperties().entrySet()){
-            System.out.println(entry.getKey()+"\t"+ entry.getValue());
-        }
+//        for (Map.Entry<Object,Object> entry: System.getProperties().entrySet()){
+//            System.out.println(entry.getKey()+"\t"+ entry.getValue());
+//        }
 //        System.out.println(TestClassLoader.class.getClassLoader());
 //        System.out.print(Thread.currentThread().getContextClassLoader());
+
+        //如何在运行时判断标准扩展类加载器能加载哪些路径下的类
+        URL[] urLs = ((URLClassLoader) ClassLoader.getSystemClassLoader()).getURLs();
+        for (int i = 0; i < urLs.length; i++) {
+            System.out.println(urLs[i]);
+        }
+
     }
 }

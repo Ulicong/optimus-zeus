@@ -1,5 +1,7 @@
 package com.resource;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -24,4 +26,64 @@ public class MyClassLoader extends URLClassLoader {
     }
 
 
+    public MyClassLoader(URL[] urls, ClassLoader parent) {
+        super(urls, parent);
+    }
+
+    protected Class<?> load(String name, boolean resolve) throws ClassNotFoundException {
+        //若类已经被加载、则重新加载一次
+        Class<?> loadedClass = super.findLoadedClass(name);
+        if (loadedClass != null) {
+            return reload(name, resolve);
+        }
+
+        //否则首次加载它
+        Class<?> aClass = super.findClass(name);
+        if (resolve) {
+            super.resolveClass(aClass);
+        }
+        return aClass;
+    }
+
+
+    public Class<?> reload(String name, boolean resolve) throws ClassNotFoundException {
+        return new MyClassLoader(super.getURLs(), super.getParent())
+                .load(name, resolve);
+    }
+
+    public Class<?> load(String name) throws ClassNotFoundException {
+        return load(name, false);
+    }
+}
+
+/**
+ * 重复加载Class A
+ */
+class TestClassLoad {
+    public static void main(String[] args) {
+        A a = new A();  // 加载类A
+        B b = new B();  // 加载类B
+        a.setB(b);  // A引用了B，把b对象拷贝到A.b
+        System.out.printf("A classLoader is %s\n", a.getClass().getClassLoader());
+        System.out.printf("B classLoader is %s\n", b.getClass().getClassLoader());
+        System.out.printf("A.b classLoader is %s\n", a.getB().getClass().getClassLoader());
+
+        try {
+            URL[] urls = new URL[]{Thread.currentThread().getContextClassLoader().getResource("")};
+            MyClassLoader c1 = new MyClassLoader(urls, a.getClass().getClassLoader());
+            Class clazz = c1.load("com.resource.A");  // 用hot swap重新加载类A
+            Object aInstance = clazz.newInstance();  // 创建A类对象
+            Method method1 = clazz.getMethod("setB", B.class);  // 获取setB(B b)方法
+            method1.invoke(aInstance, b);    // 调用setB(b)方法，重新把b对象拷贝到A.b
+            Method method2 = clazz.getMethod("getB");  // 获取getB()方法
+            Object bInstance = method2.invoke(aInstance);  // 调用getB()方法
+            System.out.printf("Reloaded A.b classLoader is %s\n", bInstance.getClass().getClassLoader());
+        } catch (ClassNotFoundException |
+                InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException |
+                IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

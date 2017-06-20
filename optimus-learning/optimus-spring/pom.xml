@@ -14,7 +14,6 @@
     <name>optimus-spring</name>
     <description>spring 基础知识学习基于DispatcherServlet</description>
 
-
     <dependencies>
         <dependency>
             <groupId>optimus-group</groupId>
@@ -22,7 +21,6 @@
             <version>1.1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

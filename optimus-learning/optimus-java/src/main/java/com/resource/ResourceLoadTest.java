@@ -1,7 +1,7 @@
 package com.resource;
 
 /**
- * Java读取资源文件
+ * Java读取资源文件-class字节码 文件等
  * Created by li.huan
  * Create Date 2017-05-18 15:37
  */
