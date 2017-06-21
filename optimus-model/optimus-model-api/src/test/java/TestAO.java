@@ -1,4 +1,3 @@
-import com.optimus.module.user.ao.UserInfoAO;
 import com.optimus.module.user.dal.entity.UserInfo;
 import org.junit.Before;
 import org.junit.Test;

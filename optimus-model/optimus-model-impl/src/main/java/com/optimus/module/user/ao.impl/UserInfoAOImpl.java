@@ -1,7 +1,6 @@
 package com.optimus.module.user.ao.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.optimus.module.user.ao.UserInfoAO;
 import com.optimus.module.user.dal.entity.UserInfo;
 import com.optimus.module.user.manager.UserInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service
 @org.springframework.stereotype.Service
-public class UserInfoAOImpl implements UserInfoAO {
+public class UserInfoAOImpl {
 
     @Autowired
     private UserInfoManager infoManager;

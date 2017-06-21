@@ -1,6 +1,5 @@
 package com.optimus.module.user.web.rpc;
 
-import com.optimus.module.user.ao.UserInfoAO;
 import com.optimus.module.user.dal.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
