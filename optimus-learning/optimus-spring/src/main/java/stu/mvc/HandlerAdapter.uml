@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.web.servlet.HandlerAdapter</OriginalElement>
+  <nodes>
+    <node x="767.0" y="80.0">org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter</node>
+    <node x="258.0" y="80.0">org.springframework.web.servlet.handler.SimpleServletHandlerAdapter</node>
+    <node x="424.25" y="0.0">org.springframework.web.servlet.HandlerAdapter</node>
+    <node x="497.0" y="80.0">org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter</node>
+    <node x="0.0" y="80.0">org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" target="org.springframework.web.servlet.HandlerAdapter">
+      <point x="0.0" y="-15.0" />
+      <point x="119.0" y="50.0" />
+      <point x="441.875" y="50.0" />
+      <point x="-52.875" y="15.0" />
+    </edge>
+    <edge source="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" target="org.springframework.web.servlet.HandlerAdapter">
+      <point x="0.0" y="-15.0" />
+      <point x="873.5" y="50.0" />
+      <point x="547.625" y="50.0" />
+      <point x="52.875" y="15.0" />
+    </edge>
+    <edge source="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" target="org.springframework.web.servlet.HandlerAdapter">
+      <point x="0.0" y="-15.0" />
+      <point x="622.0" y="60.0" />
+      <point x="512.375" y="60.0" />
+      <point x="17.625" y="15.0" />
+    </edge>
+    <edge source="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter" target="org.springframework.web.servlet.HandlerAdapter">
+      <point x="0.0" y="-15.0" />
+      <point x="367.5" y="60.0" />
+      <point x="477.125" y="60.0" />
+      <point x="-17.625" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="236.5" y="55.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

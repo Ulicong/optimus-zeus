@@ -14,7 +14,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <context:property-placeholder location="classpath:config.properties"/>
-    <context:component-scan base-package="stu.**"/>
+    <context:component-scan base-package="stu.**,com.**"/>
 
 
     <!-- 配置数据源 -->

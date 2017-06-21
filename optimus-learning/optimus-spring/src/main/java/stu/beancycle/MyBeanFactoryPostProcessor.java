@@ -29,7 +29,6 @@ public class MyBeanFactoryPostProcessor implements BeanDefinitionRegistryPostPro
 
 
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("============================");
         factory = beanFactory;
     }
 

@@ -18,10 +18,9 @@ import java.util.List;
  * Create Date 2017-04-21 11:26
  */
 @Controller
-@RequestMapping(value = "/test")
-public class TestController {
+@RequestMapping("/test")
+public class TestControllerRpc {
 
-    //@Resource(name = "cashService")
     @Autowired
     private CashService cashService;
 
